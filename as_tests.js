@@ -43,5 +43,31 @@ exports.tests=[
 		var b2 = cont.queue.length == 2;
 		done(b1 && b2);
 	}},
+	{ "desc": "pqueue test 1", "func": function(done) {
+		var pq = new PQueue();
+		done(pq.isEmpty());
+	}},
+	{ "desc": "pqueue test 2", "func": function(done) {
+		var pq = new PQueue();
+		pq.nodes = [null].concat( ["sdfa","s","gegserg","sdf","ser","sd","wqtg", "awfdsgesdf"].map(function (q) { return new pq.pnode(q, q.length); }));
+		var b1 = !pq.isValid();
+		pq.build_heap();
+		var b2 = pq.isValid();
+		done(b1 && b2);
+	}},
+	{ "desc": "pqueue test 3", "func": function(done) {
+		var pq = new PQueue();
+		pq.nodes = [null].concat( ["sdfa","s","gegserg","sdf","ser","sd","wqtg", "awfdsgesdf"].map(function (q) { return new pq.pnode(q, q.length); }));
+		pq.build_heap();
+		pq.add("pop",3);
+		done(pq.isValid());
+	}},
+	{ "desc": "pqueue test 4", "func": function(done) {
+		var pq = new PQueue();
+		pq.nodes = [null].concat( ["sdfa","s","gegserg","sdf","ser","sd","wqtg", "awfdsgesdf"].map(function (q) { return new pq.pnode(q, q.length); }));
+		pq.build_heap();
+		var front = pq.pop();
+		done(front == "s" && pq.isValid());
+	}},
 ];
 
