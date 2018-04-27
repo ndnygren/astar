@@ -16,9 +16,20 @@
 
 
 <script type="text/javascript">
-	var c_cont = new AStarCanvas(document.getElementById("canvas_window"),400,400);
+	function timeoutLoop() {
+		c_cont.step();
+		canvas_manage.drawArena(arena);
+		if (!c_cont.isComplete() && !c_cont.isFailed()) {
+			setTimeout(timeoutLoop, 10);
+		}
+	}
+
+	var canvas_manage = new AStarCanvas(document.getElementById("canvas_window"),400,400);
 	var arena = randomArena(20,20);
-	c_cont.drawArena(arena);
+	var c_cont = new AStarControl(arena, arena.data[0][0], arena.data[19][19]);
+	canvas_manage.drawArena(arena);
+
+	timeoutLoop();	
 </script>
 </body>
 </html>

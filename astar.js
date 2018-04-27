@@ -60,7 +60,7 @@ function randomArena(w,h) {
 	return arena;
 }
 
-function AStarContol(arena, start, end) {
+function AStarControl(arena, start, end) {
 	this.arena = arena;
 	this.start = start;
 	this.end = end;
@@ -79,6 +79,7 @@ function AStarContol(arena, start, end) {
 		var asc = this;
 		var current = this.queue[this.queue.length-1];
 		this.queue.pop();
+		current.stype = STypes.CHECKED;
 		var n = this.arena.neigh(current);
 		n.forEach(function (sq) {
 			sq.setBreadcrumb(current);

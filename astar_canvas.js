@@ -123,14 +123,16 @@ function AStarCanvas (cwindow, w, h) {
 		var border = 10;
 		var spacing = 3;
 		var calc_size = (this.w + -2*border + -spacing*arena.w) / arena.w;
-
+		this.canvas.getContext('2d').clearRect(0, 0, this.canvas.width, this.canvas.height);
 		for (var i = 0; i < arena.w; i++) {
 			for (var j = 0; j < arena.h; j++) {
 				var sq = arena.data[i][j];
 				var x_loc = i*(calc_size + spacing) + border;
 				var y_loc = j*(calc_size + spacing) + border;
-				this.drawSquare(x_loc,y_loc,calc_size,calc_size, "none", "black");
-				this.drawCircle(x_loc+ 0.5*calc_size, y_loc + 0.5*calc_size, sq.weight,"red", "black");
+				var fill = sq.stype == STypes.BLOCK ? "none" :
+					(sq.stype == STypes.QUEUE ? "blue" : "grey");
+				this.drawSquare(x_loc,y_loc,calc_size,calc_size, fill, "black");
+				this.drawCircle(x_loc+ 0.5*calc_size, y_loc + 0.5*calc_size, sq.weight,'rgba(255, 161, 0, 0.2)', "black");
 			}
 		}
 	};
