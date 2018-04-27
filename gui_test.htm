@@ -1,0 +1,22 @@
+
+<html>
+<head>
+	<script type="text/javascript" src="astar.js"></script>
+	<script type="text/javascript" src="astar_canvas.js"></script>
+</head>
+<body>
+
+<h1>astar</h1>
+<div id="canvas_window"></div>
+
+
+<script type="text/javascript">
+	var c_cont = new AStarCanvas(document.getElementById("canvas_window"),400,400);
+	var arena = randomArena(20,20);
+	c_cont.drawArena(arena);
+</script>
+</body>
+</html>
+
+
+
