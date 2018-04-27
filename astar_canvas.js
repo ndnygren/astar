@@ -90,11 +90,55 @@ function AStarCanvas (cwindow, w, h) {
 		var canvas = document.createElement("canvas");
 		canvas.width = this.w;
 		canvas.height = this.h;
+		this.canvas = canvas;
 		this.cwindow.appendChild(canvas);
 	};
+
+	this.drawCircle = function(x,y,r,fill_color, line_color) {
+		var context = this.canvas.getContext('2d');
+
+		context.beginPath();
+		context.arc(x, y, r, 0, 2 * Math.PI, false);
+		context.fillStyle = fill_color;
+		if (fill_color != "none" ) { context.fill(); }
+		context.lineWidth = 1;
+		context.strokeStyle = line_color;
+		context.stroke();
+	};
+
+	this.drawSquare = function (x,y,w,h, fill_color, line_color) {
+		var context = this.canvas.getContext('2d');
+		context.beginPath();
+		context.rect(x, y, w, h);
+		context.fillStyle = fill_color;
+		if (fill_color != "none" ) { context.fill(); }
+		if (line_color != "none") {
+			context.lineWidth = 1;
+			context.strokeStyle = line_color;
+			context.stroke();
+		}
+	};
+
+	this.drawArena = function(arena) {
+		var border = 10;
+		var spacing = 3;
+		var calc_size = (this.w + -2*border + -spacing*arena.w) / arena.w;
+
+		for (var i = 0; i < arena.w; i++) {
+			for (var j = 0; j < arena.h; j++) {
+				var sq = arena.data[i][j];
+				var x_loc = i*(calc_size + spacing) + border;
+				var y_loc = j*(calc_size + spacing) + border;
+				this.drawSquare(x_loc,y_loc,calc_size,calc_size, "none", "black");
+				this.drawCircle(x_loc+ 0.5*calc_size, y_loc + 0.5*calc_size, sq.weight,"red", "black");
+			}
+		}
+	};
+
 
 	this.init();
 
 }
+
 
 
